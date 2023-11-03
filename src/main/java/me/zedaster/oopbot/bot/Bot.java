@@ -1,18 +1,20 @@
 package me.zedaster.oopbot.bot;
 
-import me.zedaster.oopbot.Message;
 import me.zedaster.oopbot.User;
+import me.zedaster.oopbot.hanlder.BotHandler;
 
-import java.util.function.Consumer;
+/**
+ * Чат-бот
+ */
+public abstract class Bot {
+    protected final BotHandler botHandler;
 
-public interface Bot {
+    public Bot(BotHandler botHandler) {
+        this.botHandler = botHandler;
+    }
+
     /**
      * Отправляет пользователю сообщение
      */
-    void sendMessage(User user, String text);
-
-    /**
-     * Добавляет обработчик сообщений из бота
-     */
-    void addMessageHandler(Consumer<Message> handler);
+    public abstract void sendMessage(User user, String text);
 }

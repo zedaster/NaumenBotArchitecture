@@ -1,8 +1,9 @@
 package me.zedaster.oopbot;
 
-import me.zedaster.oopbot.bot.Bot;
 import me.zedaster.oopbot.bot.DiscordBot;
 import me.zedaster.oopbot.bot.TelegramBot;
+import me.zedaster.oopbot.hanlder.BotHandler;
+import me.zedaster.oopbot.hanlder.ReplierHandler;
 
 /**
  * Построить базовую архитектуру бота, который сможет работать в  telegram и ещё как минимум одной чат-бот платформе
@@ -21,13 +22,8 @@ public class Main {
      * Входная точка для запуска бота
      */
     public static void main(String[] args) {
-        Bot bot = new TelegramBot();
-//        Bot bot = new DiscordBot();
-        bot.addMessageHandler((message) -> {
-            // Вариант 1
-            message.reply("Ваше сообщение: '" + message.getText() + "'");
-            // Вариант 2
-            // bot.sendMessage(message.getSender(), "Ваше сообщение: '" + message.getText() + "'");
-        });
+        BotHandler helloHandler = new ReplierHandler("Ваше сообщение: '{msg}'");
+        new DiscordBot(helloHandler);
+        new TelegramBot(helloHandler);
     }
 }
